@@ -8,7 +8,7 @@ Recomendado: **Cloudflare Pages** (gratis, HTTPS automático, CDN).
 ## 1. Subir el sitio
 1. Crear cuenta gratis en https://dash.cloudflare.com
 2. Workers & Pages → Create → Pages → "Connect to Git" → elegir `MassimilianoGF/atina.uy-web`.
-   Build: sin framework, sin comando de build, carpeta de salida `/`.
+   Build: sin framework, sin comando de build, carpeta de salida `public`.
 3. Guardar y publicar. Queda en `algo.pages.dev` y cada cambio en `main` se publica solo.
 
 ## 2. Llevar el DNS del dominio a Cloudflare
