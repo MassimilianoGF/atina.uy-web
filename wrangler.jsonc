@@ -1,0 +1,8 @@
+{
+  // Sitio estático servido con Cloudflare Workers (static assets)
+  "name": "atina-uy-web",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "."
+  }
+}
