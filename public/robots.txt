@@ -1,0 +1,6 @@
+# Se permite el acceso a todos los buscadores, incluidos los de IA
+# (Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, etc.)
+User-agent: *
+Allow: /
+
+Sitemap: https://atina.uy/sitemap.xml

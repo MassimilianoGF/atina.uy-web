@@ -1,0 +1,18 @@
+# atina.uy
+
+> Empresa uruguaya de servicios informáticos para pequeñas y medianas empresas: servicio técnico, respaldos y migraciones a la nube con AWS y Azure. Contacto: info@atina.uy
+
+## Servicios
+
+- Servicio técnico informático: instalación y reinstalación de Windows, mantenimiento y puesta a punto de PCs y notebooks, configuración de redes, impresoras y correo, diagnóstico y solución de problemas.
+- Respaldos y continuidad: políticas de respaldo locales y en la nube, recuperación de información, pruebas periódicas de restauración, protección básica contra ransomware.
+- Migraciones cloud (AWS y Azure): relevamiento y propuesta de arquitectura, migración de servidores, archivos y correo, optimización de costos en la nube, acompañamiento y soporte posterior.
+
+## Cómo trabajamos
+
+Atención directa, en sitio o remota. El cliente describe lo que necesita por correo, relevamos la situación, enviamos una propuesta, lo resolvemos y damos soporte continuo.
+
+## Enlaces
+
+- [Sitio web](https://atina.uy/)
+- [Contacto](mailto:info@atina.uy)
