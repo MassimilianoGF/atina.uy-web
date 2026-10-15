@@ -8,7 +8,6 @@ import json
 import shutil
 from html import escape
 from pathlib import Path
-from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_site"
@@ -17,37 +16,17 @@ EMAIL = "info@atina.uy"
 YEAR = 2026
 LASTMOD = "2026-10-15"
 
-# Clave de Web3Forms (https://web3forms.com). Vacía = el formulario no se muestra.
-FORM_KEY = ""
-FORM_ACTION = "https://api.web3forms.com/submit"
+# El formulario de contacto se envía por FormSubmit (https://formsubmit.co), que
+# reenvía cada consulta por mail. La primera vez pide confirmar desde info@atina.uy.
+FORM_ACTION = f"https://formsubmit.co/{EMAIL}"
 
 CSP = ("default-src 'none'; img-src 'self' data:; style-src 'self'; base-uri 'none'; "
-       f"form-action {FORM_ACTION if FORM_KEY else chr(39) + 'none' + chr(39)}; upgrade-insecure-requests")
+       "form-action https://formsubmit.co; upgrade-insecure-requests")
 
 
-def mailto(subject, body=""):
-    url = f"mailto:{EMAIL}?subject={quote(subject)}"
-    if body:
-        url += f"&body={quote(body)}"
-    return url
-
-
-QUOTE_BODY = (
-    "Hola, quiero pedir un presupuesto.\n\n"
-    "Empresa:\n"
-    "Cantidad de personas o equipos:\n"
-    "Qué necesitamos:\n"
-    "Teléfono de contacto:\n"
-)
-QUOTE_SUBJECT = "Pedido de presupuesto"
-QUOTE_MAILTO = mailto(QUOTE_SUBJECT, QUOTE_BODY)
-# Los botones de presupuesto llevan a la página de contacto: el enlace mailto:
-# no hace nada en computadoras sin un programa de correo configurado.
+# Los botones de presupuesto llevan a la página de contacto, que usa un
+# formulario: el enlace mailto: no hace nada sin un programa de correo configurado.
 QUOTE = "/contacto/"
-GMAIL = ("https://mail.google.com/mail/?view=cm&fs=1&to=" + quote(EMAIL)
-         + "&su=" + quote(QUOTE_SUBJECT) + "&body=" + quote(QUOTE_BODY))
-OUTLOOK = ("https://outlook.office.com/mail/deeplink/compose?to=" + quote(EMAIL)
-           + "&subject=" + quote(QUOTE_SUBJECT) + "&body=" + quote(QUOTE_BODY))
 
 LOGO = (
     '<svg viewBox="0 0 470 140" aria-hidden="true"><defs><linearGradient id="lg" gradientUnits="userSpaceOnUse" '
@@ -526,51 +505,33 @@ def not_found():
 
 
 def contact_page():
-    ext = 'target="_blank" rel="noopener"'
-    form = ""
-    if FORM_KEY:
-        form = f'''<form class="form" action="{FORM_ACTION}" method="post">
-  <input type="hidden" name="access_key" value="{FORM_KEY}">
-  <input type="hidden" name="subject" value="Nueva consulta desde atina.uy">
-  <input type="hidden" name="from_name" value="atina.uy">
-  <input type="hidden" name="redirect" value="{BASE}/gracias/">
-  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-  <div class="row"><label>Nombre<input name="name" required autocomplete="name"></label><label>Empresa<input name="empresa" autocomplete="organization"></label></div>
-  <div class="row"><label>Correo<input type="email" name="email" required autocomplete="email"></label><label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label></div>
-  <label>¿Qué necesitás?<textarea name="message" rows="5" required placeholder="Contanos brevemente el problema o el proyecto, y cuántas personas o equipos son."></textarea></label>
-  <button class="btn btn-primary" type="submit">Enviar consulta</button>
-</form>'''
-    opts_title = "¿Preferís escribirnos desde tu correo?" if FORM_KEY else "Escribinos desde tu correo"
     body = f'''<section class="hero page-hero">
   <div class="wrap"><div>
     <div class="crumbs rise"><a href="/">Inicio</a> / Contacto</div>
     <h1 class="rise d1">Pedí tu presupuesto</h1>
-    <p class="sub rise d2">Contanos qué necesitás y te enviamos una propuesta clara, sin compromiso. Atendemos en Montevideo, a domicilio o de forma remota.</p>
+    <p class="sub rise d2">Completá el formulario y te respondemos con una propuesta clara, sin compromiso. Atendemos en Montevideo, a domicilio o de forma remota.</p>
   </div></div>
 </section>
 <section>
   <div class="wrap two">
-    <div>
-      {form}
-      <div class="contact-opts">
-        <h2>{opts_title}</h2>
-        <p class="lead">Elegí cómo escribirnos. El mensaje ya viene armado con los datos que necesitamos.</p>
-        <div class="opt-btns">
-          <a class="btn btn-primary" href="{GMAIL}" {ext}>Escribir con Gmail</a>
-          <a class="btn btn-outline" href="{OUTLOOK}" {ext}>Escribir con Outlook</a>
-          <a class="btn btn-outline" href="{QUOTE_MAILTO}">Abrir mi programa de correo</a>
-        </div>
-        <p class="addr-lbl">O copiá la dirección y escribinos desde donde quieras:</p>
-        <p class="addr">{EMAIL}</p>
-      </div>
-    </div>
+    <form class="form" action="{FORM_ACTION}" method="post">
+      <input type="hidden" name="_subject" value="Nueva consulta desde atina.uy">
+      <input type="hidden" name="_next" value="{BASE}/gracias/">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="row"><label>Nombre<input name="nombre" required autocomplete="name"></label><label>Empresa<input name="empresa" autocomplete="organization"></label></div>
+      <div class="row"><label>Correo<input type="email" name="email" required autocomplete="email"></label><label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label></div>
+      <label>¿Qué necesitás?<textarea name="mensaje" rows="6" required placeholder="Contanos brevemente el problema o el proyecto, y cuántas personas o equipos son."></textarea></label>
+      <button class="btn btn-primary" type="submit">Enviar consulta</button>
+      <p class="form-alt">¿Preferís escribirnos directo? <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+    </form>
     <aside class="aside">
-      <h3>Para responderte más rápido, contanos:</h3>
+      <h3>¿Qué pasa después?</h3>
       <ul class="checks">
-        <li><strong>Tu empresa</strong><span>Nombre y a qué se dedica.</span></li>
-        <li><strong>Cuántas personas o equipos son</strong><span>Una idea aproximada alcanza.</span></li>
-        <li><strong>Qué necesitás</strong><span>El problema o el proyecto, en pocas líneas.</span></li>
-        <li><strong>Un teléfono</strong><span>Por si es más fácil hablarlo.</span></li>
+        <li><strong>Leemos tu consulta</strong><span>Y te respondemos al correo que nos dejaste.</span></li>
+        <li><strong>Si hace falta, te preguntamos algo más</strong><span>Por correo o por teléfono.</span></li>
+        <li><strong>Te enviamos una propuesta</strong><span>Clara y sin compromiso.</span></li>
       </ul>
     </aside>
   </div>
