@@ -17,10 +17,15 @@ YEAR = 2026
 LASTMOD = "2026-10-15"
 
 # El formulario de contacto se envía por FormSubmit (https://formsubmit.co), que
-# reenvía cada consulta por mail. La primera vez pide confirmar desde info@atina.uy.
-FORM_ACTION = f"https://formsubmit.co/{EMAIL}"
+# reenvía cada consulta a info@atina.uy. FORM_ID es el alias que FormSubmit dio al
+# activar la cuenta: oculta el correo y funciona igual. assets/contacto.js lo manda
+# por fetch para no salir del sitio; sin JavaScript el envío normal vuelve a /gracias/.
+FORM_ID = "05aacbccc32cf8215aafa9aef2465a3f"
+FORM_ACTION = f"https://formsubmit.co/{FORM_ID}"
+FORM_AJAX = f"https://formsubmit.co/ajax/{FORM_ID}"
 
-CSP = ("default-src 'none'; img-src 'self' data:; style-src 'self'; base-uri 'none'; "
+CSP = ("default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; "
+       "connect-src https://formsubmit.co; base-uri 'none'; "
        "form-action https://formsubmit.co; upgrade-insecure-requests")
 
 
@@ -514,7 +519,7 @@ def contact_page():
 </section>
 <section>
   <div class="wrap two">
-    <form class="form" action="{FORM_ACTION}" method="post">
+    <form class="form" id="contacto" action="{FORM_ACTION}" data-ajax="{FORM_AJAX}" method="post">
       <input type="hidden" name="_subject" value="Nueva consulta desde atina.uy">
       <input type="hidden" name="_next" value="{BASE}/gracias/">
       <input type="hidden" name="_captcha" value="false">
@@ -524,6 +529,7 @@ def contact_page():
       <div class="row"><label>Correo<input type="email" name="email" required autocomplete="email"></label><label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label></div>
       <label>¿Qué necesitás?<textarea name="mensaje" rows="6" required placeholder="Contanos brevemente el problema o el proyecto, y cuántas personas o equipos son."></textarea></label>
       <button class="btn btn-primary" type="submit">Enviar consulta</button>
+      <p class="form-error" id="form-error" role="alert" hidden>No pudimos enviar la consulta. Probá de nuevo en un momento o escribinos a <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p class="form-alt">¿Preferís escribirnos directo? <a href="mailto:{EMAIL}">{EMAIL}</a></p>
     </form>
     <aside class="aside">
@@ -535,7 +541,8 @@ def contact_page():
       </ul>
     </aside>
   </div>
-</section>'''
+</section>
+<script src="/assets/contacto.js" defer></script>'''
     ld = [ORG, {"@context": "https://schema.org", "@type": "ContactPage", "url": BASE + "/contacto/", "name": "Contacto atina.uy"}]
     return page("/contacto/", "Contacto y presupuesto | atina.uy",
                 "Pedí un presupuesto de soporte informático, respaldos, Microsoft 365 o migración a la nube para tu empresa en Montevideo.", body, ld)
