@@ -115,10 +115,10 @@ SERVICES = [
         "short": "Soporte para los equipos y la infraestructura de tu oficina.",
         "bullets": ["Instalación y reinstalación de Windows", "Mantenimiento de PCs y notebooks",
                     "Redes, impresoras y correo", "Diagnóstico y solución de problemas"],
-        "title": "Servicio técnico informático para empresas en Uruguay",
+        "title": "Servicio técnico informático para empresas en Montevideo",
         "h1": "Servicio técnico informático para tu empresa",
-        "desc": "Servicio técnico informático para pymes en Uruguay: instalación de Windows, mantenimiento de PCs y notebooks, redes, impresoras y correo. Atención en sitio o remota.",
-        "intro": "Cuando una PC no arranca, la impresora no imprime o internet anda mal, se frena el trabajo. Nos encargamos de que los equipos de tu oficina funcionen, en sitio o de forma remota.",
+        "desc": "Servicio técnico informático para pymes en Montevideo: instalación de Windows, mantenimiento de PCs y notebooks, redes, impresoras y correo. Atención a domicilio o remota.",
+        "intro": "Cuando una PC no arranca, la impresora no imprime o internet anda mal, se frena el trabajo. Nos encargamos de que los equipos de tu oficina funcionen, a domicilio o de forma remota.",
         "includes": [
             ("Instalación y reinstalación de Windows", "Equipos nuevos o que hay que dejar a nuevo, con los programas que usás."),
             ("Mantenimiento y puesta a punto", "PCs y notebooks lentas, actualizaciones, limpieza y revisión general."),
@@ -130,7 +130,7 @@ SERVICES = [
         "signs": ["La PC tarda mucho en arrancar", "Hay que reinstalar Windows", "El wifi de la oficina se corta",
                   "La impresora no aparece en la red", "Llegó un equipo nuevo y hay que configurarlo", "El correo no sincroniza en el celular"],
         "faqs": [
-            ("¿La atención es en sitio o remota?", "Las dos. Según el problema, vamos a tu oficina o lo resolvemos de forma remota."),
+            ("¿La atención es a domicilio o remota?", "Las dos. Según el problema, vamos a tu oficina o casa en Montevideo, o lo resolvemos de forma remota."),
             ("¿Instalan Windows en equipos nuevos?", "Sí. Instalamos o reinstalamos Windows y dejamos el equipo listo con los programas que usás."),
             ("¿Trabajan con empresas chicas?", "Sí. El servicio está pensado para pequeñas y medianas empresas."),
         ],
@@ -141,9 +141,9 @@ SERVICES = [
         "short": "Que un disco roto o un virus no te frene el negocio.",
         "bullets": ["Respaldos locales y en la nube", "Recuperación de información",
                     "Pruebas de restauración", "Protección contra ransomware"],
-        "title": "Respaldos de información para empresas en Uruguay",
+        "title": "Respaldos de información para empresas en Montevideo",
         "h1": "Respaldos para que tu información esté siempre a salvo",
-        "desc": "Respaldos de información para pymes en Uruguay: copias locales y en la nube, recuperación de archivos, pruebas de restauración y protección contra ransomware.",
+        "desc": "Respaldos de información para pymes en Montevideo: copias locales y en la nube, recuperación de archivos, pruebas de restauración y protección contra ransomware.",
         "intro": "Un disco que se rompe, un archivo borrado o un ransomware pueden dejar a tu empresa sin su información. Armamos respaldos que funcionan y los probamos para que, si pasa algo, puedas recuperarte.",
         "includes": [
             ("Política de respaldos", "Definimos qué se respalda, cada cuánto y dónde."),
@@ -167,9 +167,9 @@ SERVICES = [
         "short": "Dejá el servidor de la oficina y trabajá desde cualquier lugar.",
         "bullets": ["Migración del correo a Microsoft 365", "Archivos del servidor a SharePoint y OneDrive",
                     "Seguridad del correo", "Capacitación en Teams y SharePoint"],
-        "title": "Migración a Microsoft 365 y SharePoint para empresas en Uruguay",
+        "title": "Migración a Microsoft 365 y SharePoint para empresas en Montevideo",
         "h1": "Migración a Microsoft 365 y SharePoint",
-        "desc": "Migramos el correo de tu empresa a Microsoft 365 y los archivos del servidor local a SharePoint y OneDrive para trabajar online desde cualquier lugar. Pymes en Uruguay.",
+        "desc": "Migramos el correo de tu empresa a Microsoft 365 y los archivos del servidor local a SharePoint y OneDrive para trabajar online desde cualquier lugar. Pymes en Montevideo.",
         "intro": "Si tus archivos viven en un servidor de la oficina, para trabajar hay que estar ahí. Pasamos tu correo a Microsoft 365 y tus archivos a SharePoint y OneDrive para que tu equipo trabaje online, desde donde esté.",
         "includes": [
             ("Migración del correo a Microsoft 365", "Pasamos las casillas a Exchange Online."),
@@ -194,9 +194,9 @@ SERVICES = [
         "short": "Llevamos tus servidores a la nube con un plan claro y costos controlados.",
         "bullets": ["Relevamiento y arquitectura", "Migración de servidores y datos",
                     "Optimización de costos", "Soporte posterior"],
-        "title": "Migración a la nube con AWS y Azure para empresas en Uruguay",
+        "title": "Migración a la nube con AWS y Azure para empresas en Montevideo",
         "h1": "Migración de servidores a la nube con AWS y Azure",
-        "desc": "Migramos los servidores y servicios de tu empresa a AWS o Azure: relevamiento, arquitectura, migración, optimización de costos y soporte posterior. Pymes en Uruguay.",
+        "desc": "Migramos los servidores y servicios de tu empresa a AWS o Azure: relevamiento, arquitectura, migración, optimización de costos y soporte posterior. Pymes en Montevideo.",
         "intro": "Llevar los servidores a la nube evita depender de equipos propios, pero hay que hacerlo con un plan. Relevamos tu infraestructura, proponemos una arquitectura en AWS o Azure y hacemos la migración con costos controlados.",
         "includes": [
             ("Relevamiento", "Vemos qué servidores y servicios tenés y cómo se usan."),
@@ -218,8 +218,8 @@ SERVICES = [
 
 HOME_FAQS = [
     ("¿Qué servicios ofrece atina.uy?", "Servicio técnico informático (instalación de Windows, mantenimiento de PCs y notebooks, redes, impresoras y correo), respaldos y recuperación de información, migración del correo y los archivos a Microsoft 365 y SharePoint, y migraciones a la nube con AWS y Azure."),
-    ("¿Trabajan con empresas chicas?", "Sí. Nuestros servicios están pensados para pequeñas y medianas empresas de Uruguay."),
-    ("¿La atención es en sitio o remota?", "Las dos. Según el problema o el proyecto, resolvemos en tu oficina o de forma remota."),
+    ("¿Trabajan con empresas chicas?", "Sí. Nuestros servicios están pensados para pequeñas y medianas empresas de Montevideo."),
+    ("¿La atención es a domicilio o remota?", "Las dos. Según el problema o el proyecto, vamos a tu oficina o casa en Montevideo, o lo resolvemos de forma remota."),
     ("¿Pueden pasar los archivos de nuestro servidor a la nube?", "Sí. Migramos los archivos del servidor local a SharePoint y OneDrive, y el correo a Microsoft 365, para que tu equipo trabaje online desde cualquier lugar."),
     ("¿Pueden migrar mis servidores a AWS o Azure?", "Sí. Relevamos tu infraestructura, proponemos una arquitectura, migramos servidores, archivos y correo, y optimizamos los costos en la nube."),
     ("¿Cómo pido un presupuesto?", f"Escribinos a {EMAIL} con una breve descripción de lo que necesitás y te enviamos una propuesta."),
@@ -263,11 +263,11 @@ def footer():
   <div class="wrap">
     <div class="cols">
       <div><a class="logo" href="/" aria-label="atina.uy, inicio">{LOGO}</a>
-        <p>Soporte informático y nube para pequeñas y medianas empresas de Uruguay.</p></div>
+        <p>Soporte informático y nube para pequeñas y medianas empresas de Montevideo.</p></div>
       <div><h4>Servicios</h4><ul>{svc}</ul></div>
       <div><h4>Contacto</h4><ul><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li><a href="{QUOTE}">Pedí presupuesto</a></li><li><a href="/#preguntas">Preguntas frecuentes</a></li></ul></div>
     </div>
-    <div class="bottom"><span>© {YEAR} atina.uy · Uruguay</span><span>Soporte IT · Respaldos · Microsoft 365 · AWS · Azure</span></div>
+    <div class="bottom"><span>© {YEAR} atina.uy · Montevideo, Uruguay</span><span>Soporte IT · Respaldos · Microsoft 365 · AWS · Azure</span></div>
   </div>
 </footer>'''
 
@@ -294,8 +294,8 @@ ORG = {
     "@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "/#empresa",
     "name": "atina.uy", "url": BASE + "/", "logo": BASE + "/logo/logo-light.svg", "image": BASE + "/og-image.jpg",
     "email": EMAIL,
-    "description": "Servicio técnico informático, respaldos, Microsoft 365 y SharePoint, y migraciones a la nube (AWS y Azure) para pequeñas y medianas empresas en Uruguay.",
-    "areaServed": {"@type": "Country", "name": "Uruguay"},
+    "description": "Servicio técnico informático, respaldos, Microsoft 365 y SharePoint, y migraciones a la nube (AWS y Azure) para pequeñas y medianas empresas en Montevideo, Uruguay.",
+    "areaServed": {"@type": "City", "name": "Montevideo", "containedInPlace": {"@type": "Country", "name": "Uruguay"}},
     "knowsAbout": ["Soporte técnico informático", "Instalación de Windows", "Respaldos", "Redes", "Microsoft 365",
                    "SharePoint", "Exchange Online", "Amazon Web Services", "Microsoft Azure", "Migración a la nube"],
     "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Servicios", "itemListElement": [
@@ -354,7 +354,7 @@ def home():
 </a>''' for s in SERVICES)
     why = [
         ("user", "Atención directa", "Hablás con quien resuelve, sin intermediarios ni call centers."),
-        ("map", "En sitio o remoto", "Vamos a tu oficina o lo resolvemos a distancia, según convenga."),
+        ("map", "A domicilio o remoto", "Vamos a tu oficina en Montevideo o lo resolvemos a distancia, según convenga."),
         ("doc", "Propuestas claras", "Antes de empezar sabés qué vamos a hacer y por qué."),
         ("life", "Acompañamiento", "Seguimos cerca después del trabajo para que todo siga funcionando."),
     ]
@@ -362,7 +362,7 @@ def home():
     body = f'''<section class="hero">
   <div class="wrap">
     <div>
-      <span class="badge rise"><i></i>Soporte IT y nube para pymes en Uruguay</span>
+      <span class="badge rise"><i></i>Soporte IT y nube para pymes en Montevideo</span>
       <h1 class="rise d1">Soporte informático y nube para tu empresa, <span class="hl">sin vueltas.</span></h1>
       <p class="sub rise d2">Mantenemos tus equipos funcionando, tus datos respaldados y te ayudamos a trabajar en la nube con Microsoft 365, AWS o Azure.</p>
       <div class="hero-ctas rise d3"><a class="btn btn-primary" href="{QUOTE}">Pedí presupuesto</a><a class="btn btn-ghost" href="#servicios">Ver servicios</a></div>
@@ -409,7 +409,7 @@ def home():
     <div class="steps">
       <div class="step"><h3>Nos contás qué necesitás</h3><p>Por correo, con una breve descripción del problema o el proyecto.</p></div>
       <div class="step"><h3>Relevamos y proponemos</h3><p>Analizamos tu situación y te enviamos una propuesta clara.</p></div>
-      <div class="step"><h3>Lo resolvemos</h3><p>En sitio o de forma remota, según lo que convenga.</p></div>
+      <div class="step"><h3>Lo resolvemos</h3><p>A domicilio o de forma remota, según lo que convenga.</p></div>
       <div class="step"><h3>Te acompañamos</h3><p>Soporte continuo para que todo siga funcionando.</p></div>
     </div>
   </div>
@@ -424,8 +424,8 @@ def home():
 
 <div id="contacto">{cta_block()}</div>'''
     ld = [ORG, {"@context": "https://schema.org", "@type": "WebSite", "name": "atina.uy", "url": BASE + "/", "inLanguage": "es-UY"}, faq_ld(HOME_FAQS)]
-    return page("/", "atina.uy | Soporte informático y nube para pymes en Uruguay",
-                "Servicio técnico informático para empresas en Uruguay: instalación de Windows, mantenimiento de PCs, redes, respaldos, Microsoft 365 y SharePoint, y migraciones a la nube con AWS y Azure para pymes.",
+    return page("/", "atina.uy | Soporte informático y nube para pymes en Montevideo",
+                "Servicio técnico informático para empresas en Montevideo: instalación de Windows, mantenimiento de PCs, redes, respaldos, Microsoft 365 y SharePoint, y migraciones a la nube con AWS y Azure para pymes.",
                 body, ld)
 
 
@@ -492,7 +492,7 @@ def service_page(s):
     url = BASE + svc_url(s)
     ld = [
         {"@context": "https://schema.org", "@type": "Service", "name": s["name"], "description": s["desc"], "url": url,
-         "serviceType": s["name"], "areaServed": {"@type": "Country", "name": "Uruguay"},
+         "serviceType": s["name"], "areaServed": {"@type": "City", "name": "Montevideo", "containedInPlace": {"@type": "Country", "name": "Uruguay"}},
          "provider": {"@id": BASE + "/#empresa", "@type": "ProfessionalService", "name": "atina.uy", "url": BASE + "/"}},
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Inicio", "item": BASE + "/"},
@@ -521,14 +521,14 @@ def sitemap():
 
 def llms():
     lines = ["# atina.uy", "",
-             f"> Empresa uruguaya de servicios informáticos para pequeñas y medianas empresas: servicio técnico, respaldos, Microsoft 365 y SharePoint, y migraciones a la nube con AWS y Azure. Contacto: {EMAIL}", "",
+             f"> Empresa de servicios informáticos de Montevideo, Uruguay, para pequeñas y medianas empresas: servicio técnico, respaldos, Microsoft 365 y SharePoint, y migraciones a la nube con AWS y Azure. Contacto: {EMAIL}", "",
              "## Servicios", ""]
     for s in SERVICES:
         lines.append(f"- [{s['name']}]({BASE}{svc_url(s)}): " + "; ".join(t.lower() if i else t for i, (t, _) in enumerate(s["includes"])) + ".")
     lines += ["", "## Caso real", "",
               "Un estudio contable tenía sus archivos en un servidor local. Migramos su correo a Microsoft 365 y sus archivos a SharePoint, y ahora trabaja 100% online desde cualquier lugar.", "",
               "## Cómo trabajamos", "",
-              "Atención directa, en sitio o remota. El cliente describe lo que necesita por correo, relevamos la situación, enviamos una propuesta, lo resolvemos y damos soporte continuo.", "",
+              "Atención directa en Montevideo, a domicilio o remota. El cliente describe lo que necesita por correo, relevamos la situación, enviamos una propuesta, lo resolvemos y damos soporte continuo.", "",
               "## Preguntas frecuentes", ""]
     lines += [f"- {q} {a}" for q, a in HOME_FAQS]
     lines += ["", "## Enlaces", "", f"- [Sitio web]({BASE}/)", f"- [Contacto](mailto:{EMAIL})", ""]
