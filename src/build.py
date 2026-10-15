@@ -17,8 +17,12 @@ EMAIL = "info@atina.uy"
 YEAR = 2026
 LASTMOD = "2026-10-15"
 
-CSP = ("default-src 'none'; img-src 'self' data:; style-src 'self'; "
-       "base-uri 'none'; form-action 'none'; upgrade-insecure-requests")
+# Clave de Web3Forms (https://web3forms.com). Vacía = el formulario no se muestra.
+FORM_KEY = ""
+FORM_ACTION = "https://api.web3forms.com/submit"
+
+CSP = ("default-src 'none'; img-src 'self' data:; style-src 'self'; base-uri 'none'; "
+       f"form-action {FORM_ACTION if FORM_KEY else chr(39) + 'none' + chr(39)}; upgrade-insecure-requests")
 
 
 def mailto(subject, body=""):
@@ -35,7 +39,15 @@ QUOTE_BODY = (
     "Qué necesitamos:\n"
     "Teléfono de contacto:\n"
 )
-QUOTE = mailto("Pedido de presupuesto", QUOTE_BODY)
+QUOTE_SUBJECT = "Pedido de presupuesto"
+QUOTE_MAILTO = mailto(QUOTE_SUBJECT, QUOTE_BODY)
+# Los botones de presupuesto llevan a la página de contacto: el enlace mailto:
+# no hace nada en computadoras sin un programa de correo configurado.
+QUOTE = "/contacto/"
+GMAIL = ("https://mail.google.com/mail/?view=cm&fs=1&to=" + quote(EMAIL)
+         + "&su=" + quote(QUOTE_SUBJECT) + "&body=" + quote(QUOTE_BODY))
+OUTLOOK = ("https://outlook.office.com/mail/deeplink/compose?to=" + quote(EMAIL)
+           + "&subject=" + quote(QUOTE_SUBJECT) + "&body=" + quote(QUOTE_BODY))
 
 LOGO = (
     '<svg viewBox="0 0 470 140" aria-hidden="true"><defs><linearGradient id="lg" gradientUnits="userSpaceOnUse" '
@@ -222,7 +234,7 @@ HOME_FAQS = [
     ("¿La atención es a domicilio o remota?", "Las dos. Según el problema o el proyecto, vamos a tu oficina o casa en Montevideo, o lo resolvemos de forma remota."),
     ("¿Pueden pasar los archivos de nuestro servidor a la nube?", "Sí. Migramos los archivos del servidor local a SharePoint y OneDrive, y el correo a Microsoft 365, para que tu equipo trabaje online desde cualquier lugar."),
     ("¿Pueden migrar mis servidores a AWS o Azure?", "Sí. Relevamos tu infraestructura, proponemos una arquitectura, migramos servidores, archivos y correo, y optimizamos los costos en la nube."),
-    ("¿Cómo pido un presupuesto?", f"Escribinos a {EMAIL} con una breve descripción de lo que necesitás y te enviamos una propuesta."),
+    ("¿Cómo pido un presupuesto?", f"Desde la página de contacto o escribiendo a {EMAIL} con una breve descripción de lo que necesitás. Te enviamos una propuesta."),
 ]
 
 CASE_HTML = '''<div class="case-card">
@@ -251,7 +263,7 @@ def header(current=""):
     <nav class="nav" aria-label="Principal">{links}<a class="btn btn-primary btn-sm" href="{QUOTE}">Pedí presupuesto</a></nav>
     <details class="menu">
       <summary aria-label="Abrir menú">{icon(ICONS["menu"])}</summary>
-      <nav class="menu-panel" aria-label="Menú">{links}<a href="/#contacto">Contacto</a><a class="btn btn-primary" href="{QUOTE}">Pedí presupuesto</a></nav>
+      <nav class="menu-panel" aria-label="Menú">{links}<a href="/contacto/">Contacto</a><a class="btn btn-primary" href="{QUOTE}">Pedí presupuesto</a></nav>
     </details>
   </div>
 </header>'''
@@ -265,7 +277,7 @@ def footer():
       <div><a class="logo" href="/" aria-label="atina.uy, inicio">{LOGO}</a>
         <p>Soporte informático y nube para pequeñas y medianas empresas de Montevideo.</p></div>
       <div><h4>Servicios</h4><ul>{svc}</ul></div>
-      <div><h4>Contacto</h4><ul><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li><a href="{QUOTE}">Pedí presupuesto</a></li><li><a href="/#preguntas">Preguntas frecuentes</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="/contacto/">Contacto</a></li><li>{EMAIL}</li><li><a href="/#preguntas">Preguntas frecuentes</a></li></ul></div>
     </div>
     <div class="bottom"><span>© {YEAR} atina.uy · Montevideo, Uruguay</span><span>Soporte IT · Respaldos · Microsoft 365 · AWS · Azure</span></div>
   </div>
@@ -278,8 +290,8 @@ def cta_block(title="¿Hablamos de tu empresa?", text="Contanos qué necesitás 
     <div class="cta-box">
       <h2>{title}</h2>
       <p>{text}</p>
-      <div class="hero-ctas"><a class="btn btn-primary" href="{QUOTE}">Pedí presupuesto</a><a class="btn btn-ghost" href="mailto:{EMAIL}">Escribinos</a></div>
-      <span class="mail">o escribí a {EMAIL}</span>
+      <div class="hero-ctas"><a class="btn btn-primary" href="{QUOTE}">Pedí presupuesto</a><a class="btn btn-ghost" href="/contacto/">Escribinos</a></div>
+      <span class="mail">o escribí directo a {EMAIL}</span>
     </div>
   </div>
 </section>'''
@@ -437,7 +449,7 @@ def service_page(s):
     case = ""
     if s.get("case"):
         case = f'''<section><div class="wrap"><p class="eyebrow">Caso real</p><h2>Un estudio contable que ahora trabaja 100% online</h2><p class="lead">Así quedó uno de nuestros clientes después de la migración.</p>{CASE_HTML}</div></section>'''
-    quote = mailto(f"Presupuesto: {s['name']}", QUOTE_BODY)
+    quote = QUOTE
     body = f'''<section class="hero page-hero">
   <div class="wrap">
     <div>
@@ -513,8 +525,74 @@ def not_found():
     return html.replace('<meta name="robots" content="index, follow, max-image-preview:large">', '<meta name="robots" content="noindex">')
 
 
+def contact_page():
+    ext = 'target="_blank" rel="noopener"'
+    form = ""
+    if FORM_KEY:
+        form = f'''<form class="form" action="{FORM_ACTION}" method="post">
+  <input type="hidden" name="access_key" value="{FORM_KEY}">
+  <input type="hidden" name="subject" value="Nueva consulta desde atina.uy">
+  <input type="hidden" name="from_name" value="atina.uy">
+  <input type="hidden" name="redirect" value="{BASE}/gracias/">
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <div class="row"><label>Nombre<input name="name" required autocomplete="name"></label><label>Empresa<input name="empresa" autocomplete="organization"></label></div>
+  <div class="row"><label>Correo<input type="email" name="email" required autocomplete="email"></label><label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label></div>
+  <label>¿Qué necesitás?<textarea name="message" rows="5" required placeholder="Contanos brevemente el problema o el proyecto, y cuántas personas o equipos son."></textarea></label>
+  <button class="btn btn-primary" type="submit">Enviar consulta</button>
+</form>'''
+    opts_title = "¿Preferís escribirnos desde tu correo?" if FORM_KEY else "Escribinos desde tu correo"
+    body = f'''<section class="hero page-hero">
+  <div class="wrap"><div>
+    <div class="crumbs rise"><a href="/">Inicio</a> / Contacto</div>
+    <h1 class="rise d1">Pedí tu presupuesto</h1>
+    <p class="sub rise d2">Contanos qué necesitás y te enviamos una propuesta clara, sin compromiso. Atendemos en Montevideo, a domicilio o de forma remota.</p>
+  </div></div>
+</section>
+<section>
+  <div class="wrap two">
+    <div>
+      {form}
+      <div class="contact-opts">
+        <h2>{opts_title}</h2>
+        <p class="lead">Elegí cómo escribirnos. El mensaje ya viene armado con los datos que necesitamos.</p>
+        <div class="opt-btns">
+          <a class="btn btn-primary" href="{GMAIL}" {ext}>Escribir con Gmail</a>
+          <a class="btn btn-outline" href="{OUTLOOK}" {ext}>Escribir con Outlook</a>
+          <a class="btn btn-outline" href="{QUOTE_MAILTO}">Abrir mi programa de correo</a>
+        </div>
+        <p class="addr-lbl">O copiá la dirección y escribinos desde donde quieras:</p>
+        <p class="addr">{EMAIL}</p>
+      </div>
+    </div>
+    <aside class="aside">
+      <h3>Para responderte más rápido, contanos:</h3>
+      <ul class="checks">
+        <li><strong>Tu empresa</strong><span>Nombre y a qué se dedica.</span></li>
+        <li><strong>Cuántas personas o equipos son</strong><span>Una idea aproximada alcanza.</span></li>
+        <li><strong>Qué necesitás</strong><span>El problema o el proyecto, en pocas líneas.</span></li>
+        <li><strong>Un teléfono</strong><span>Por si es más fácil hablarlo.</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>'''
+    ld = [ORG, {"@context": "https://schema.org", "@type": "ContactPage", "url": BASE + "/contacto/", "name": "Contacto atina.uy"}]
+    return page("/contacto/", "Contacto y presupuesto | atina.uy",
+                "Pedí un presupuesto de soporte informático, respaldos, Microsoft 365 o migración a la nube para tu empresa en Montevideo.", body, ld)
+
+
+def thanks_page():
+    body = '''<section class="notfound"><div>
+  <p class="big hl">¡Gracias!</p>
+  <h1>Recibimos tu consulta</h1>
+  <p class="lead">Te respondemos a la brevedad al correo que nos dejaste.</p>
+  <div class="hero-ctas"><a class="btn btn-primary" href="/">Volver al inicio</a><a class="btn btn-outline" href="/#servicios">Ver servicios</a></div>
+</div></section>'''
+    html = page("/gracias/", "Gracias | atina.uy", "Recibimos tu consulta.", body, ORG)
+    return html.replace('<meta name="robots" content="index, follow, max-image-preview:large">', '<meta name="robots" content="noindex">')
+
+
 def sitemap():
-    urls = ["/"] + [svc_url(s) for s in SERVICES]
+    urls = ["/"] + [svc_url(s) for s in SERVICES] + ["/contacto/"]
     items = "\n".join(f"  <url>\n    <loc>{BASE}{u}</loc>\n    <lastmod>{LASTMOD}</lastmod>\n  </url>" for u in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}\n</urlset>\n'
 
@@ -531,7 +609,7 @@ def llms():
               "Atención directa en Montevideo, a domicilio o remota. El cliente describe lo que necesita por correo, relevamos la situación, enviamos una propuesta, lo resolvemos y damos soporte continuo.", "",
               "## Preguntas frecuentes", ""]
     lines += [f"- {q} {a}" for q, a in HOME_FAQS]
-    lines += ["", "## Enlaces", "", f"- [Sitio web]({BASE}/)", f"- [Contacto](mailto:{EMAIL})", ""]
+    lines += ["", "## Enlaces", "", f"- [Sitio web]({BASE}/)", f"- [Contacto]({BASE}/contacto/)", ""]
     return "\n".join(lines)
 
 
@@ -545,6 +623,9 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(service_page(s), encoding="utf-8")
     (OUT / "404.html").write_text(not_found(), encoding="utf-8")
+    for slug, fn in (("contacto", contact_page), ("gracias", thanks_page)):
+        (OUT / slug).mkdir(exist_ok=True)
+        (OUT / slug / "index.html").write_text(fn(), encoding="utf-8")
     (OUT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     (OUT / "llms.txt").write_text(llms(), encoding="utf-8")
     print(f"Sitio generado en {OUT}")
