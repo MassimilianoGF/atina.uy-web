@@ -1,1 +1,6 @@
-{"permissions":{"allow":["Bash(python3 .claude/redes/publicar.py:*)","Bash(python3 /home/user/atina.uy-web/.claude/redes/publicar.py:*)"]}}
+{"permissions":{"allow":[
+  "Bash(.claude/redes/publicar.py:*)",
+  "Bash(./.claude/redes/publicar.py:*)",
+  "Bash(/home/user/atina.uy-web/.claude/redes/publicar.py:*)",
+  "Bash(python3 .claude/redes/publicar.py:*)"
+]}}
